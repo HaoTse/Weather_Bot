@@ -87,3 +87,5 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+weather_bot/settings_secret.py
