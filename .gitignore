@@ -89,3 +89,4 @@ ENV/
 .ropeproject
 
 weather_bot/settings_secret.py
+db.sqlite3
