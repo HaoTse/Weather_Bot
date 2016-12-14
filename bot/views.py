@@ -33,7 +33,9 @@ def callback(request):
     if request.method == 'POST':
         signature = request.META['HTTP_X_LINE_SIGNATURE']
         body = request.body.decode('utf-8')
-        location = "臺南"
+        location_list = ["臺北", "新北", "桃園", "臺中", "臺南", "高雄", "基隆",\
+                        "新竹", "苗栗", "彰化", "南投", "雲林", "嘉義", "屏東",\
+                        "宜蘭", "花蓮", "台東", "澎湖", "金門", "連江"]
 
         try:
             events = parser.parse(body, signature)
@@ -45,9 +47,28 @@ def callback(request):
         for event in events:
             if isinstance(event, MessageEvent):
                 if isinstance(event.message, TextMessage):
+                    if "天氣" in event.message.text:
+                        output = get_weather("臺南")
+                        for location in location_list:
+                            if location in event.message.text:
+                                if location == "新竹":
+                                    if "新竹縣" in event.message.text:
+                                        output = get_weather("新竹縣")
+                                    else:
+                                        output = get_weather(location)
+                                elif location == "嘉義":
+                                    if "嘉義縣" in event.message.text:
+                                        output = get_weather("嘉義縣")
+                                    else:
+                                        output = get_weather(location)
+                                else:
+                                    output = get_weather(location)
+                    else:
+                        output = event.message.text
+
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text = get_weather(location))
+                        TextSendMessage(text = output)
                     )
 
         return HttpResponse()
