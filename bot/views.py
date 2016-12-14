@@ -55,14 +55,15 @@ def callback(request):
                                     if "新竹縣" in event.message.text:
                                         output = get_weather("新竹縣")
                                     else:
-                                        output = get_weather(location)
+                                        output = get_weather("新竹市")
                                 elif location == "嘉義":
                                     if "嘉義縣" in event.message.text:
                                         output = get_weather("嘉義縣")
                                     else:
-                                        output = get_weather(location)
+                                        output = get_weather("嘉義市")
                                 else:
                                     output = get_weather(location)
+                                break;
                     else:
                         output = event.message.text
 
