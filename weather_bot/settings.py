@@ -25,6 +25,7 @@ except ImportError:
     SECRET_KEY = get_env_variable('SECRET_KEY')
     LINE_CHANNEL_ACCESS_TOKEN = get_env_variable('LINE_CHANNEL_ACCESS_TOKEN')
     LINE_CHANNEL_SECRET = get_env_variable('LINE_CHANNEL_SECRET')
+    WEATHER_AUTHORIZATION_KEY = get_env_variable('WEATHER_AUTHORIZATION_KEY')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,7 +36,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['peaceful-harbor-51552.herokuapp.com']
+ALLOWED_HOSTS = [
+    'peaceful-harbor-51552.herokuapp.com',
+    '127.0.0.1'
+]
 
 
 # Application definition
